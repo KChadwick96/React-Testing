@@ -1,0 +1,24 @@
+import React from 'react';
+import { mount } from 'enzyme';
+
+import Root from 'Root';
+import CommentList from 'components/CommentList';
+
+let wrapper;
+beforeEach(() => {
+    const initialState = {
+        comments: ['Comment 1', 'Comment 2']
+    };
+
+    wrapper = mount(<Root initialState={initialState}><CommentList /></Root>);
+});
+
+it('creates one li per comment', () => {
+    expect(wrapper.find('li').length).toEqual(2);
+});
+
+it('shows the text for each comment', () => {
+    const rendered = wrapper.render();
+    expect(rendered.text()).toContain('Comment 1');
+    expect(rendered.text()).toContain('Comment 2');
+});
