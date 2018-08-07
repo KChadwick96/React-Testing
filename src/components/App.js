@@ -4,13 +4,16 @@ import { connect } from 'react-redux';
 
 import CommentBox from 'components/CommentBox';
 import CommentList from 'components/CommentList';
+import * as actions from 'actions';
 
 class App extends Component {
 
     renderAuthButton() {
         const auth = this.props.auth;
         return (
-            <button>{auth ? 'Sign Out' : 'Sign In'}</button>
+            <button onClick={() => this.props.changeAuth(!auth)}>
+                {auth ? 'Sign Out' : 'Sign In'}
+            </button>
         );
     }
     
@@ -25,7 +28,7 @@ class App extends Component {
                 </li>
                 <li>{this.renderAuthButton()}</li>
             </ul>
-        )
+        );
     }
 
     render() {
@@ -45,4 +48,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, actions)(App)
